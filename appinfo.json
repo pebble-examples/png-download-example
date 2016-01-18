@@ -1,0 +1,22 @@
+{
+  "uuid": "d4ec0006-14e6-43b7-aaa8-ba0a01ffeeab",
+  "shortName": "png-download-example",
+  "longName": "png-download-example",
+  "companyName": "MakeAwesomeHappen",
+  "versionLabel": "1.0",
+  "sdkVersion": "3",
+  "targetPlatforms": ["aplite", "basalt", "chalk"],
+  "watchapp": {
+    "watchface": false
+  },
+  "appKeys": {
+    "AppKeyIndex": 0,
+    "AppKeyDataLength": 1,
+    "AppKeyDataChunk": 2,
+    "AppKeyChunkSize": 3,
+    "AppKeyComplete": 4
+  },
+  "resources": {
+    "media": []
+  }
+}
