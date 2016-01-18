@@ -8,17 +8,17 @@ typedef enum {
   AppKeyComplete     // Signal that all data has been transferred
 } AppKey;
 
-static uint8_t *img_data;
-static int img_size;
+static uint8_t *s_img_data;
+static int s_img_size;
 
 static void inbox_received_handler(DictionaryIterator *iter, void *context) {
   // Get the received image chunk
   Tuple *img_size_t = dict_find(iter, AppKeyDataLength);
   if(img_size_t) {
-    img_size = img_size_t->value->int32;
+    s_img_size = img_size_t->value->int32;
 
     // Allocate buffer for image data
-    img_data = (uint8_t*)malloc(img_size * sizeof(uint8_t));
+    s_img_data = (uint8_t*)malloc(s_img_size * sizeof(uint8_t));
   }
 
   // An image chunk
@@ -33,14 +33,14 @@ static void inbox_received_handler(DictionaryIterator *iter, void *context) {
     int index = index_t->value->int32;
 
     // Save the chunk
-    memcpy(&img_data[index], chunk_data, chunk_size);
+    memcpy(&s_img_data[index], chunk_data, chunk_size);
   }
 
   // Complete?
   Tuple *complete_t = dict_find(iter, AppKeyComplete);
   if(complete_t) {
     // Show the image
-    main_window_set_image_data(img_data, img_size);
+    main_window_set_image_data(s_img_data, s_img_size);
   }
 }
 
@@ -54,7 +54,7 @@ void comm_init() {
 
 void comm_deinit() {
   // Free image data buffer
-  if(img_data) {
-    free(img_data);
+  if(s_img_data) {
+    free(s_img_data);
   }
 }
